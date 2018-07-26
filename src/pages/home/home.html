@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Wizard's Companion
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-input type="text" placeholder="Name" id="inputText" [(ngModel)]="inputValue"></ion-input>
+  </ion-item>
+  <ion-list>
+    <button class="item item-block item-md" (click) = "jumpToSpellbook()" ion-item>
+      Hello
+    </button>
+    <button class="item item-block item-md" ion-item>
+      Hello2
+    </button>
+    <button class="item item-block item-md" ion-item>
+      Hello3
+    </button>
+    <button class="item item-block item-md" ion-item>
+      Hello4
+    </button>
+  </ion-list>
+  <!--<button ion-button small (click) = "showPrompt()">Login</button>-->
+</ion-content>
