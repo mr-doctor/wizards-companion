@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {SpellbookModel, SpellModel} from "../../providers/page/page";
+import {SpellPage} from "../spell/spell";
 
 /**
  * Generated class for the SpellbookPage page.
@@ -15,21 +17,22 @@ import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angula
 })
 export class SpellbookPage {
 
+  model: SpellbookModel;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.model = this.navParams.data.input;
   }
 
-  ionViewDidLoad() {
+  ionViewWillLoad() {
     console.log('ionViewDidLoad SpellbookPage');
   }
 
-  sayName() {
-    var input = this.navParams.data.input;
-    let alert = this.alertCtrl.create({
-      title: 'Your name',
-      subTitle: "Your name is " + input,
-      buttons: ['Thanks!']
-    });
-    alert.present();
+  newSpell() {
+    this.model.pages.push(new SpellModel("Spell "+(this.model.currentPage++)));
+  }
+
+  jumpToSpell(page: SpellModel) {
+    this.navCtrl.push(SpellPage, {input: page});
   }
 
 }

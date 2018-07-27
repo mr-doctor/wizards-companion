@@ -8,13 +8,16 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SpellbookPage } from '../pages/spellbook/spellbook';
 import {SpellPage} from "../pages/spell/spell";
+import { PageProvider } from '../providers/page/page';
+import {SpellEditPage} from "../pages/spell-edit/spell-edit";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     SpellbookPage,
-    SpellPage
+    SpellPage,
+    SpellEditPage
   ],
   imports: [
     BrowserModule,
@@ -25,12 +28,14 @@ import {SpellPage} from "../pages/spell/spell";
     MyApp,
     HomePage,
     SpellbookPage,
-    SpellPage
+    SpellPage,
+    SpellEditPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PageProvider
   ]
 })
 export class AppModule {}

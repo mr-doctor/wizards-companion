@@ -1,5 +1,5 @@
 <!--
-  Generated template for the SpellPage page.
+  Generated template for the SpellEditPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -8,21 +8,17 @@
 
   <ion-navbar>
     <ion-title>
-      {{model.name}}
+      Edit Spell
     </ion-title>
-    <ion-buttons end>
-      <button ion-button round (click) = "edit()">
-        Edit
-      </button>
-      <button ion-button round>
-        Delete
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-item>
+    <ion-label color="primary" stacked>Name</ion-label>
+    <ion-input placeholder={{model.name}}></ion-input>
+  </ion-item>
 
 </ion-content>

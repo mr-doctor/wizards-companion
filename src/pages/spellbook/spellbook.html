@@ -7,16 +7,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Spellbook
+      {{model.name}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-  <h1>
-    This is a demonstrative app.
-  </h1>
-  <button ion-button (click) = "sayName()">What's my name?</button>
-
+  <ion-list id = "spell-list">
+    <button *ngFor="let page of model.pages" class="item item-block item-md" (click) = "jumpToSpell(page)" ion-item>
+      {{page.name}}
+    </button>
+  </ion-list>
+  <button ion-button block (click) = "newSpell()" text-center="">
+    +
+  </button>
 </ion-content>

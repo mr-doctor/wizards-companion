@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {SpellbookPage} from "../spellbook/spellbook";
+import {PageProvider, SpellbookModel} from "../../providers/page/page";
 
 @Component({
   selector: 'page-home',
@@ -8,22 +9,14 @@ import {SpellbookPage} from "../spellbook/spellbook";
 })
 export class HomePage {
 
-  inputValue: string = "";
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public pageProvider: PageProvider) {
 
   }
 
-  jumpToSpellbook() {
-    // let input = this.inputValue;
-    // let alert = this.alertCtrl.create({
-    //   title: 'Welcome',
-    //   subTitle: "Welcome to this demonstrative app, your name is " + input,
-    //   buttons: ['OK']
-    // });
-    // alert.present();
-    this.navCtrl.push(SpellbookPage);
+  jumpToSpellbook(page: SpellbookModel) {
+    this.navCtrl.push(SpellbookPage, {input: page});
   }
-
 
 }
+
