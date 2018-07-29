@@ -27,7 +27,7 @@ export class SpellEditPage {
     this.model = this.navParams.data.input;
     this.nameInput = this.model.name;
     this.castTimeInput = this.model.castTime;
-    this.range = this.model.range;
+    this.range = (this.model.range == "0") ? "Melee" : this.model.range;
   }
 
   ionViewDidLoad() {
