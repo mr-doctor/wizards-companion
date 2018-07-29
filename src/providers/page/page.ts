@@ -34,7 +34,7 @@ export class SpellbookModel {
 }
 
 export class SpellModel {
-  constructor(public name: String) {
+  constructor(public name: String, public castTime: String, public range: String) {
 
   }
 }

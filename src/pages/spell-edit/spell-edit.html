@@ -10,6 +10,11 @@
     <ion-title>
       Edit Spell
     </ion-title>
+    <ion-buttons end>
+      <button ion-button round (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -18,11 +23,22 @@
 <ion-content padding>
   <ion-item>
     <ion-label color="primary" stacked>Name</ion-label>
-    <ion-input placeholder={{model.name}}></ion-input>
+    <ion-input placeholder={{model.name}} [(ngModel)]="nameInput"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label color="primary" stacked>Name</ion-label>
-    <ion-input placeholder={{model.name}}></ion-input>
+    <ion-label>Cast Time</ion-label>
+    <ion-select [(ngModel)]="castTimeInput">
+      <ion-option value="Action">Action</ion-option>
+      <ion-option value="Reaction">Reaction</ion-option>
+      <ion-option value="Bonus Action">Bonus Action</ion-option>
+      <ion-option value="Concentration">Concentration</ion-option>
+    </ion-select>
   </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="range" type="number" placeholder={{model.range}}>
+      {{model.range}}
+    </ion-input>
+  </ion-item>
+
 
 </ion-content>
