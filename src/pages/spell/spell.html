@@ -44,7 +44,7 @@
     <ion-label>
       {{((model.dice > 0) ? model.dice : "") +
       model.diceType +
-      ((model.extraEffect > 0) ? " + " + model.extraEffect : " ") + " " +
+      ((model.extraEffect > 0) ? ((model.dice > 0) ? " + " : "") + model.extraEffect : " ") + " " +
        model.effectType + " " +
       (("Healing".localeCompare(model.effectType) == 0 || "".localeCompare(model.effectType) == 0) ? "" : " Damage")}}
     </ion-label>

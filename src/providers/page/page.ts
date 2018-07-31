@@ -37,11 +37,10 @@ export class SpellModel {
   diceType: String = "";
   castTime: String = "";
   range: String = "";
-  dice: number = 0;
+  dice: number;
   effectType: String = "";
   desc: String = "";
-  toKill: boolean = false;
-  extraEffect: number = 0;
+  extraEffect: number;
   constructor(public name: String) {
 
   }

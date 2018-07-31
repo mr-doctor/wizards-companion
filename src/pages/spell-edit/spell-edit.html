@@ -42,10 +42,13 @@
   </ion-item>
 
   <ion-item>
-    <ion-label color="primary" stacked>Dice</ion-label>
+    <ion-label color="primary" stacked>Dice Number</ion-label>
     <ion-input [(ngModel)]="dice" type="number" min="0" placeholder={{model.dice}}>
       {{model.dice}}
     </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Dice</ion-label>
     <ion-select [(ngModel)]="diceType" align="left">
       <ion-option value="d4">d4</ion-option>
       <ion-option value="d6">d6</ion-option>
