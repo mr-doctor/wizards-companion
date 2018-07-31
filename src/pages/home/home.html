@@ -10,6 +10,9 @@
   <ion-list id = "spellbook-list">
     <button *ngFor="let page of pageProvider.pages" class="item item-block item-md" (click) = "jumpToSpellbook(page)" ion-item>
       {{page.name}}
+      <button ion-button color = "light" (click)="delete(page)" item-right>
+        Delete
+      </button>
     </button>
   </ion-list>
   <button ion-button block (click) = "pageProvider.newSpellbook()" text-center="">

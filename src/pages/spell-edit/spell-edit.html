@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar [hideBackButton]="true">
     <ion-title>
       Edit Spell
     </ion-title>
@@ -26,17 +26,64 @@
     <ion-input placeholder={{model.name}} [(ngModel)]="nameInput"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Cast Time</ion-label>
+    <ion-label color="primary" stacked>Cast Time</ion-label>
     <ion-select [(ngModel)]="castTimeInput">
       <ion-option value="Action">Action</ion-option>
       <ion-option value="Reaction">Reaction</ion-option>
       <ion-option value="Bonus Action">Bonus Action</ion-option>
-      <ion-option value="Concentration">Concentration</ion-option>
+      <!--<ion-option value="Concentration">Concentration</ion-option>-->
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-input [(ngModel)]="range" type="number" placeholder={{model.range}}>
+    <ion-label color="primary" stacked>Range</ion-label>
+    <ion-input [(ngModel)]="range" type="number" min="0" placeholder={{model.range}}>
       {{model.range}}
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Dice</ion-label>
+    <ion-input [(ngModel)]="dice" type="number" min="0" placeholder={{model.dice}}>
+      {{model.dice}}
+    </ion-input>
+    <ion-select [(ngModel)]="diceType" align="left">
+      <ion-option value="d4">d4</ion-option>
+      <ion-option value="d6">d6</ion-option>
+      <ion-option value="d8">d8</ion-option>
+      <ion-option value="d10">d10</ion-option>
+      <ion-option value="d12">d12</ion-option>
+      <ion-option value="d20">d20</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Extra Effect</ion-label>
+    <ion-input [(ngModel)]="extraEffect" type="number" min="0" placeholder={{model.extraEffect}}>
+      {{model.extraEffect}}
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Effect Type</ion-label>
+    <ion-select [(ngModel)]="effectType" placeholder="{{model.effectType}}">
+      <ion-option value="Acid">Acid</ion-option>
+      <ion-option value="Bludgeoning">Bludgeoning</ion-option>
+      <ion-option value="Cold">Cold</ion-option>
+      <ion-option value="Fire">Fire</ion-option>
+      <ion-option value="Force">Force</ion-option>
+      <ion-option value="Lightning">Lightning</ion-option>
+      <ion-option value="Necrotic">Necrotic</ion-option>
+      <ion-option value="Piercing">Piercing</ion-option>
+      <ion-option value="Poison">Poison</ion-option>
+      <ion-option value="Radiant">Radiant</ion-option>
+      <ion-option value="Slashing">Slashing</ion-option>
+      <ion-option value="Thunder">Thunder</ion-option>
+      <ion-option value="Healing">Healing</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Description</ion-label>
+    <ion-input [(ngModel)]="desc" type="text" placeholder={{model.desc}}>
+      {{model.desc}}
     </ion-input>
   </ion-item>
 

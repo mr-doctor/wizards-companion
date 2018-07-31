@@ -18,7 +18,7 @@ export class PageProvider {
   }
 
   newSpellbook() {
-    this.pages.push(new SpellbookModel("Spellbook "+(this.currentPage++)));
+    this.pages.push(new SpellbookModel("Spellbook "+(this.pages.length + 1)));
   }
 }
 
@@ -34,7 +34,15 @@ export class SpellbookModel {
 }
 
 export class SpellModel {
-  constructor(public name: String, public castTime: String, public range: String) {
+  diceType: String = "";
+  castTime: String = "";
+  range: String = "";
+  dice: number = 0;
+  effectType: String = "";
+  desc: String = "";
+  toKill: boolean = false;
+  extraEffect: number = 0;
+  constructor(public name: String) {
 
   }
 }

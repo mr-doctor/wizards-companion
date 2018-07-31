@@ -9,14 +9,23 @@
     <ion-title>
       {{model.name}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button round (click)="edit()">
+        Edit
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list id = "spell-list">
-    <button *ngFor="let page of model.pages" class="item item-block item-md" (click) = "jumpToSpell(page)" ion-item>
-      {{page.name}}
-    </button>
+  <ion-list id="spell-list">
+
+      <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
+        {{page.name}}
+        <button ion-button color = "light" (click)="delete(page)" item-right>
+          Delete
+        </button>
+      </button>
   </ion-list>
   <button ion-button block (click) = "newSpell()" text-center="">
     +

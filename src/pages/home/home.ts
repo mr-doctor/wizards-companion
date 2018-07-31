@@ -18,5 +18,12 @@ export class HomePage {
     this.navCtrl.push(SpellbookPage, {input: page});
   }
 
+  delete(page: SpellbookModel) {
+    let index = this.pageProvider.pages.indexOf(page, 0);
+    if (index > -1) {
+      this.pageProvider.pages.splice(index, 1);
+    }
+  }
+
 }
 
