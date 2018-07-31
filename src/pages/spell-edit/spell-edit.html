@@ -31,7 +31,22 @@
       <ion-option value="Action">Action</ion-option>
       <ion-option value="Reaction">Reaction</ion-option>
       <ion-option value="Bonus Action">Bonus Action</ion-option>
-      <!--<ion-option value="Concentration">Concentration</ion-option>-->
+      <!--<ion-option value="Ritual">Ritual</ion-option>-->
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Duration</ion-label>
+      <ion-input [(ngModel)]="durationInput" type="number" min="0" placeholder={{model.duration}}>
+        {{model.duration}}
+      </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" stacked>Duration Type</ion-label>
+    <ion-select [(ngModel)]="durationType">
+      <ion-option value="Round">Rounds</ion-option>
+      <ion-option value="Day">Days</ion-option>
+      <ion-option value="Hours">Hours</ion-option>
+      <ion-option value="Minutes">Minutes</ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
@@ -85,9 +100,9 @@
 
   <ion-item>
     <ion-label color="primary" stacked>Description</ion-label>
-    <ion-input [(ngModel)]="desc" type="text" placeholder={{model.desc}}>
+    <ion-textarea [(ngModel)]="desc" type="text" placeholder={{model.desc}} (input)="autoSizeDescription()">
       {{model.desc}}
-    </ion-input>
+    </ion-textarea>
   </ion-item>
 
 

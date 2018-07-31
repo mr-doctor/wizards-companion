@@ -41,6 +41,8 @@ export class SpellModel {
   effectType: String = "";
   desc: String = "";
   extraEffect: number;
+  duration: number;
+  durationType: String = "";
   constructor(public name: String) {
 
   }

@@ -11,6 +11,7 @@ import {SpellPage} from "../pages/spell/spell";
 import { PageProvider } from '../providers/page/page';
 import {SpellEditPage} from "../pages/spell-edit/spell-edit";
 import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
+import { UtilProvider } from '../providers/util/util';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,10 @@ import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PageProvider
+    PageProvider,
+    UtilProvider,
+    UtilProvider,
+    UtilProvider
   ]
 })
 export class AppModule {}

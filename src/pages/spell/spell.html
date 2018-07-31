@@ -11,7 +11,7 @@
       {{model.name}}
     </ion-title>
     <ion-buttons end>
-      <button ion-button round (click) = "edit()">
+      <button ion-button round (click)="edit()">
         Edit
       </button>
     </ion-buttons>
@@ -33,19 +33,27 @@
 
   <ion-item>
     <ion-label>
-      {{model.range + (("Melee".localeCompare(model.range) == 0 || "".localeCompare(model.range) == 0) ? "" : " metres")}}
+      {{model.range + (("Melee".localeCompare(model.range) == 0 || "".localeCompare(model.range) == 0) ? "" : "
+      metres")}}
     </ion-label>
     <ion-note item-end>
       Range
     </ion-note>
   </ion-item>
-
+  <ion-item>
+    <ion-label>
+      {{((model.duration > 0) ? model.duration + " " : "") + model.durationType}}
+    </ion-label>
+    <ion-note item-end>
+      Duration
+    </ion-note>
+  </ion-item>
   <ion-item>
     <ion-label>
       {{((model.dice > 0) ? model.dice : "") +
       model.diceType +
       ((model.extraEffect > 0) ? ((model.dice > 0) ? " + " : "") + model.extraEffect : " ") + " " +
-       model.effectType + " " +
+      model.effectType + " " +
       (("Healing".localeCompare(model.effectType) == 0 || "".localeCompare(model.effectType) == 0) ? "" : " Damage")}}
     </ion-label>
     <ion-note item-end>
@@ -56,9 +64,8 @@
     </ion-note>
   </ion-item>
 
-  <ion-item>
+  <ion-item text-wrap>
     {{model.desc}}
   </ion-item>
-
 
 </ion-content>

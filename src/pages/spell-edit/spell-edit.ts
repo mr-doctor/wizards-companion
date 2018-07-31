@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SpellbookModel, SpellModel} from "../../providers/page/page";
 import {SpellPage} from "../spell/spell";
+import {UtilProvider} from "../../providers/util/util";
 
 /**
  * Generated class for the SpellEditPage page.
@@ -27,6 +28,8 @@ export class SpellEditPage {
 
   model: SpellModel;
   extraEffect: number;
+  durationInput: number;
+  durationType: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.model = this.navParams.data.input;
@@ -38,6 +41,8 @@ export class SpellEditPage {
     this.effectType = this.model.effectType;
     this.extraEffect = this.model.extraEffect;
     this.desc = this.model.desc;
+    this.durationInput = this.model.duration;
+    this.durationType = this.model.durationType;
   }
 
   ionViewDidLoad() {
@@ -53,7 +58,15 @@ export class SpellEditPage {
     this.model.extraEffect = this.extraEffect;
     this.model.effectType = this.effectType;
     this.model.desc = this.desc;
+    this.model.duration = this.durationInput;
+
+    if (this.durationInput == 0) {
+      this.model.durationType = "Instantaneous";
+    } else if (this.durationInput == 1) {
+      this.model.durationType = this.durationType.replace(/s+$/, "");
+    } else {
+      this.model.durationType = this.durationType;
+    }
     this.navCtrl.pop();
   }
-
 }
