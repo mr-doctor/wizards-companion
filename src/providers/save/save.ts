@@ -17,7 +17,7 @@ export class SaveProvider {
   }
 
   saveSpellbook(page: SpellbookPage) {
-    this.storage.set("Spellbook " + page.pageID, page);
+    // this.storage.set("Spellbook " + page.pageID, page);
   }
 
 }

@@ -33,7 +33,7 @@ export class SpellbookPage {
   }
 
   newSpell() {
-    this.saver.saveSpellbook(this);
+    // this.saver.saveSpellbook(this);
     this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1)));
   }
 
@@ -47,7 +47,7 @@ export class SpellbookPage {
     if (index > -1) {
       this.model.pages.splice(index, 1);
     }
-    this.saver.saveSpellbook(this);
+    // this.saver.saveSpellbook(this);
   }
 
   edit() {

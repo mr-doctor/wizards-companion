@@ -105,5 +105,12 @@
     </ion-textarea>
   </ion-item>
 
+  <ion-fab bottom right >
+    <button ion-fab><ion-icon name="arrow-dropup"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="save()"><ion-icon name="checkmark-circle-outline"></ion-icon></button>
+      <button ion-fab (click)="back()"><ion-icon name="arrow-round-back"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

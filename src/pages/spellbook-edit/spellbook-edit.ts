@@ -29,6 +29,10 @@ export class SpellbookEditPage {
     this.navCtrl.pop();
   }
 
+  back() {
+    this.navCtrl.pop();
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SpellbookEditPage');
   }
