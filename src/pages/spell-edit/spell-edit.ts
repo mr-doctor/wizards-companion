@@ -31,10 +31,8 @@ export class SpellEditPage {
   extraEffect: number;
   durationInput: number;
   durationType: String;
-  private parentPage: SpellbookPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public saver: SaveProvider) {
-    // this.parentPage = this.navParams.data.parentPage;
 
     this.model = this.navParams.data.input;
     this.nameInput = this.model.name;
@@ -72,7 +70,6 @@ export class SpellEditPage {
     } else {
       this.model.durationType = this.durationType;
     }
-    // this.saver.saveSpellbook(this.parentPage);
     this.navCtrl.pop();
   }
 

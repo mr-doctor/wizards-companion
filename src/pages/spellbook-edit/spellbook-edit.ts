@@ -22,6 +22,7 @@ export class SpellbookEditPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public saver: SaveProvider) {
     this.model = this.navParams.data.inputModel;
+    this.nameInput = this.model.name;
   }
 
   save() {

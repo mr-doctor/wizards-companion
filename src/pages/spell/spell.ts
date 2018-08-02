@@ -23,11 +23,10 @@ export class SpellPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.model = this.navParams.data.input;
-    this.parentPage = this.navParams.data.parent;
   }
 
   edit() {
-    this.navCtrl.push(SpellEditPage, {input: this.model, parentPage: this.parentPage});
+    this.navCtrl.push(SpellEditPage, {input: this.model});
   }
 
   ionViewDidLoad() {
