@@ -11,7 +11,8 @@ import {SpellPage} from "../pages/spell/spell";
 import { PageProvider } from '../providers/page/page';
 import {SpellEditPage} from "../pages/spell-edit/spell-edit";
 import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
-import { UtilProvider } from '../providers/util/util';
+import { SaveProvider } from '../providers/save/save';
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UtilProvider } from '../providers/util/util';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,9 +42,7 @@ import { UtilProvider } from '../providers/util/util';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PageProvider,
-    UtilProvider,
-    UtilProvider,
-    UtilProvider
+    SaveProvider
   ]
 })
 export class AppModule {}

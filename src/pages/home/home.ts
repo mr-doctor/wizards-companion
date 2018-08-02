@@ -9,13 +9,14 @@ import {PageProvider, SpellbookModel} from "../../providers/page/page";
 })
 export class HomePage {
 
+  pageID: number = 0;
 
   constructor(public navCtrl: NavController, public pageProvider: PageProvider) {
 
   }
 
   jumpToSpellbook(page: SpellbookModel) {
-    this.navCtrl.push(SpellbookPage, {input: page});
+    this.navCtrl.push(SpellbookPage, {input: page, pageID: this.pageID++});
   }
 
   delete(page: SpellbookModel) {

@@ -19,21 +19,16 @@ import {SpellbookPage} from "../spellbook/spellbook";
 export class SpellPage {
 
   model: SpellModel;
-  previousPage: SpellbookModel;
+  parentPage: SpellbookPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.model = this.navParams.data.input;
-    this.previousPage = this.navParams.data.previous;
+    this.parentPage = this.navParams.data.parent;
   }
 
   edit() {
-    this.navCtrl.push(SpellEditPage, {input: this.model});
+    this.navCtrl.push(SpellEditPage, {input: this.model, parentPage: this.parentPage});
   }
-  //
-  // delete() {
-  //   this.model.toKill = true;
-  //   this.navCtrl.pop();
-  // }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SpellPage');

@@ -42,9 +42,9 @@
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Duration Type</ion-label>
-    <ion-select [(ngModel)]="durationType">
-      <ion-option value="Round">Rounds</ion-option>
-      <ion-option value="Day">Days</ion-option>
+    <ion-select [(ngModel)]="durationType" placeholder={{model.durationType}}>
+      <ion-option value="Rounds">Rounds</ion-option>
+      <ion-option value="Days">Days</ion-option>
       <ion-option value="Hours">Hours</ion-option>
       <ion-option value="Minutes">Minutes</ion-option>
     </ion-select>
@@ -100,7 +100,7 @@
 
   <ion-item>
     <ion-label color="primary" stacked>Description</ion-label>
-    <ion-textarea [(ngModel)]="desc" type="text" placeholder={{model.desc}} (input)="autoSizeDescription()">
+    <ion-textarea [(ngModel)]="desc" type="text" placeholder={{model.desc}}>
       {{model.desc}}
     </ion-textarea>
   </ion-item>

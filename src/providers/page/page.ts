@@ -27,6 +27,7 @@ export class SpellbookModel {
 
   pages: SpellModel[] = [];
   currentPage: number = 1;
+  pageID: number;
 
   constructor(public name: String) {
 
