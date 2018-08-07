@@ -13,6 +13,7 @@ import {SpellEditPage} from "../pages/spell-edit/spell-edit";
 import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
 import { SaveProvider } from '../providers/save/save';
 import {IonicStorageModule} from "@ionic/storage";
+import { FirebaseProvider } from '../providers/firebase/firebase';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {IonicStorageModule} from "@ionic/storage";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PageProvider,
-    SaveProvider
+    SaveProvider,
+    FirebaseProvider
   ]
 })
 export class AppModule {}

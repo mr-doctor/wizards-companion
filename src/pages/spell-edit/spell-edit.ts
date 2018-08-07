@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SpellbookModel, SpellModel} from "../../providers/page/page";
-import {SpellPage} from "../spell/spell";
-import {SpellbookPage} from "../spellbook/spellbook";
-import {SaveProvider} from "../../providers/save/save";
+import {FirebaseProvider} from "../../providers/firebase/firebase";
 
 /**
  * Generated class for the SpellEditPage page.
@@ -32,7 +30,7 @@ export class SpellEditPage {
   durationInput: number;
   durationType: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public saver: SaveProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public firebase: FirebaseProvider) {
 
     this.model = this.navParams.data.input;
     this.nameInput = this.model.name;
@@ -70,6 +68,7 @@ export class SpellEditPage {
     } else {
       this.model.durationType = this.durationType;
     }
+    this.firebase.uploadSpell(this.model);
     this.navCtrl.pop();
   }
 
