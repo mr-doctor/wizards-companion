@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "112408276315",
+    "firebase_url": "https://wizard-s-companion.firebaseio.com",
+    "project_id": "wizard-s-companion",
+    "storage_bucket": "wizard-s-companion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112408276315:android:98053b451124d9f5",
+        "android_client_info": {
+          "package_name": "com.mrdoctor.wizardscompanion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112408276315-6vegupcg7gp0sp8rpfq58cke3lfi5nm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABri1fCf65lToHVhHbV0XLgoHmum40kuk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

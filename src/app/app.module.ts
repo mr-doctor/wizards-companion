@@ -14,6 +14,7 @@ import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
 import { SaveProvider } from '../providers/save/save';
 import {IonicStorageModule} from "@ionic/storage";
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import {Firebase} from "@ionic-native/firebase";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PageProvider,
     SaveProvider,
-    FirebaseProvider
+    FirebaseProvider,
+    Firebase
   ]
 })
 export class AppModule {}
