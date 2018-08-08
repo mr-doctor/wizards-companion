@@ -15,6 +15,18 @@ import { SaveProvider } from '../providers/save/save';
 import {IonicStorageModule} from "@ionic/storage";
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import {Firebase} from "@ionic-native/firebase";
+import {AngularFireModule} from "angularfire2";
+import {AngularFireStorageModule} from "angularfire2/storage";
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+var firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
+};
 
 @NgModule({
   declarations: [
@@ -28,7 +40,10 @@ import {Firebase} from "@ionic-native/firebase";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
