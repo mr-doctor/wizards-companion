@@ -17,7 +17,7 @@ import {FirebaseProvider} from "../../providers/firebase/firebase";
 })
 export class SpellEditPage {
 
-  nameInput: String = "";
+  nameInput: string = "";
   castTimeInput: String = "";
   range: String = "Melee";
   dice: number = 0;

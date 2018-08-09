@@ -11,6 +11,7 @@ import QuerySnapshot = firebase.firestore.QuerySnapshot;
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class FirebaseProvider {
   
@@ -30,8 +31,18 @@ export class FirebaseProvider {
   }
   
   uploadSpell(spell: SpellModel) {
+    var spellJSON = JSON.parse(JSON.stringify(spell));
+    var collectionReference = firebase.firestore().collection("Spells").add(spellJSON)
+      .then(function () {
+      console.log("Successfully uploaded");
+    }).catch(function () {
+      console.log("Failed to upload");
+    });
+  }
+
+  downloadAllSpells() {
     var collectionReference = firebase.firestore().collection("Spells");
-    
+
     collectionReference.get().then( querySnapshot => {
       console.log("Found collection");
       this.displaySpells(querySnapshot)
