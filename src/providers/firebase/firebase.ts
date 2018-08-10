@@ -27,7 +27,6 @@ export class FirebaseProvider {
       messagingSenderId: "112408276315"
     };
     firebase.initializeApp(config);
-    
   }
   
   uploadSpell(spell: SpellModel) {
