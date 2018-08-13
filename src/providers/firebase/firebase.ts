@@ -1,10 +1,8 @@
-import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {SpellModel} from "../page/page";
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
-import {Firebase} from "@ionic-native/firebase";
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -40,17 +38,13 @@ export class FirebaseProvider {
     });
   }
 
-  downloadAllSpells() : SpellModel[] {
+  downloadAllSpells() : Promise<QuerySnapshot> {
     const collectionReference = firebase.firestore().collection("Spells");
 
-    let spells : SpellModel[] = [];
-
-    collectionReference.get().then( querySnapshot => {
+    return collectionReference.get();/*.then(querySnapshot => {
       console.log("Found collection");
-      spells = (this.displaySpells(querySnapshot));
-    });
-
-    return spells;
+      return this.displaySpells(querySnapshot);
+    });*/
   }
   
   displaySpells(querySnapshot: QuerySnapshot) : SpellModel[] {
@@ -61,7 +55,9 @@ export class FirebaseProvider {
     const spells: SpellModel[] = [];
     querySnapshot.forEach(function (documentSnapshot) {
       let data = documentSnapshot.data();
-      spells.push(FirebaseProvider.toSpell(JSON.parse(JSON.stringify(data))));
+      let spell = FirebaseProvider.toSpell(JSON.parse(JSON.stringify(data)));
+      // console.log(spell);
+      spells.push(spell);
     });
 
     return spells;
@@ -79,6 +75,7 @@ export class FirebaseProvider {
     spell.desc = data["desc"];
     spell.effectType = data["effectType"];
 
+    console.log(spell);
     return spell;
   }
   

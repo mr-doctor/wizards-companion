@@ -49,7 +49,8 @@ export class SpellbookPage {
       }, {
         text: 'Import',
         handler: () => {
-          this.navCtrl.push(SpellImportPage);
+          console.log(this.model);
+          this.navCtrl.push(SpellImportPage, {requestor: this.model});
         }
       }]
     });
