@@ -19,10 +19,11 @@ import {SpellbookPage} from "../spellbook/spellbook";
 export class SpellPage {
 
   model: SpellModel;
-  parentPage: SpellbookPage;
+  private allowEdit: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.model = this.navParams.data.input;
+    this.allowEdit = this.navParams.data.allowEdit;
   }
 
   edit() {

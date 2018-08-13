@@ -15,12 +15,19 @@
 
 <ion-content padding>
   <ion-list id="spell-list">
-
-    <button *ngFor="let page of model.pages" class="item item-block item-md" ion-item>
+    <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
       {{page.name}}
       <button ion-button color = "light" (click)="import(page)" item-right>
         Import
       </button>
+
+      <button ion-button color = "light" (click)="select(page)" item-left>
+        +
+      </button>
+      <!--<ion-item>
+      <ion-checkbox (ionChange)="select(page)" item-left>
+      </ion-checkbox>
+      </ion-item>-->
     </button>
   </ion-list>
 

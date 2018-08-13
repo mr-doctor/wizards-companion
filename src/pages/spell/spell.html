@@ -10,7 +10,7 @@
     <ion-title>
       {{model.name}}
     </ion-title>
-    <ion-buttons end>
+    <ion-buttons *ngIf="allowEdit" end>
       <button ion-button round (click)="edit()">
         Edit
       </button>

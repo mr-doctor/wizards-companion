@@ -58,7 +58,7 @@ export class SpellbookPage {
   }
 
   jumpToSpell(page: SpellModel) {
-    this.navCtrl.push(SpellPage, {input: page});
+    this.navCtrl.push(SpellPage, {input: page, allowEdit: true});
   }
 
   delete(page: SpellModel) {
