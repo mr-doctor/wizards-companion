@@ -18,6 +18,7 @@ import {Firebase} from "@ionic-native/firebase";
 import {AngularFireModule} from "angularfire2";
 import {AngularFireStorageModule} from "angularfire2/storage";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import {SpellImportPage} from "../pages/spell-import/spell-import";
 
 var firebaseConfig = {
   apiKey: "",
@@ -35,7 +36,8 @@ var firebaseConfig = {
     SpellbookPage,
     SpellPage,
     SpellEditPage,
-    SpellbookEditPage
+    SpellbookEditPage,
+    SpellImportPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ var firebaseConfig = {
     SpellbookPage,
     SpellPage,
     SpellEditPage,
-    SpellbookEditPage
+    SpellbookEditPage,
+    SpellImportPage
   ],
   providers: [
     StatusBar,

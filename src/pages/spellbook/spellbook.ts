@@ -4,6 +4,7 @@ import {SpellbookModel, SpellModel} from "../../providers/page/page";
 import {SpellPage} from "../spell/spell";
 import {SpellbookEditPage} from "../spellbook-edit/spellbook-edit";
 import {SaveProvider} from "../../providers/save/save";
+import {SpellImportPage} from "../spell-import/spell-import";
 
 /**
  * Generated class for the SpellbookPage page.
@@ -22,7 +23,7 @@ export class SpellbookPage {
   model: SpellbookModel;
   public pageID: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public saver: SaveProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.model = this.navParams.data.input;
     this.pageID = this.navParams.data.pageID;
     this.model.pageID = this.pageID;
@@ -33,8 +34,26 @@ export class SpellbookPage {
   }
 
   newSpell() {
-    // this.saver.saveSpellbook(this);
-    this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1)));
+    this.optionBox();
+  }
+
+  optionBox() {
+    let alert = this.alertCtrl.create({
+      title: "Add Spell",
+      subTitle: "How do you want to add this spell?",
+      buttons: [{
+        text: "Create New",
+        handler: () => {
+          this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1)));
+        }
+      }, {
+        text: 'Import',
+        handler: () => {
+          this.navCtrl.push(SpellImportPage);
+        }
+      }]
+    });
+    alert.present();
   }
 
   jumpToSpell(page: SpellModel) {

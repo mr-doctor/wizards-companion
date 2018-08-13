@@ -4,6 +4,7 @@ import {SpellModel} from "../page/page";
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import {Firebase} from "@ionic-native/firebase";
 
 /*
   Generated class for the FirebaseProvider provider.
@@ -39,24 +40,46 @@ export class FirebaseProvider {
     });
   }
 
-  downloadAllSpells() {
-    var collectionReference = firebase.firestore().collection("Spells");
+  downloadAllSpells() : SpellModel[] {
+    const collectionReference = firebase.firestore().collection("Spells");
+
+    let spells : SpellModel[] = [];
 
     collectionReference.get().then( querySnapshot => {
       console.log("Found collection");
-      this.displaySpells(querySnapshot)
+      spells = (this.displaySpells(querySnapshot));
     });
+
+    return spells;
   }
   
-  displaySpells(querySnapshot: QuerySnapshot) {
+  displaySpells(querySnapshot: QuerySnapshot) : SpellModel[] {
     if (querySnapshot.empty) {
       console.log("No docs found");
-      return;
+      return [];
     }
+    const spells: SpellModel[] = [];
     querySnapshot.forEach(function (documentSnapshot) {
-      var data = documentSnapshot.data();
-      console.log(data);
+      let data = documentSnapshot.data();
+      spells.push(FirebaseProvider.toSpell(JSON.parse(JSON.stringify(data))));
     });
+
+    return spells;
+  }
+
+  static toSpell(data: JSON) {
+    const spell: SpellModel = new SpellModel(data["name"]);
+    spell.castTime = data["castTime"];
+    spell.duration = data["duration"];
+    spell.dice = data["dice"];
+    spell.range = data["range"];
+    spell.durationType = data["durationType"];
+    spell.extraEffect = data["extraEffect"];
+    spell.diceType = data["diceType"];
+    spell.desc = data["desc"];
+    spell.effectType = data["effectType"];
+
+    return spell;
   }
   
   
