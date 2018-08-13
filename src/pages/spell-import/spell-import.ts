@@ -25,15 +25,13 @@ export class SpellImportPage {
     this.requestor = this.navParams.data.requestor;
     console.log(this.requestor);
 
-    this.firebasePromise = this.firebase.downloadAllSpells();
+    this.firebasePromise = FirebaseProvider.downloadAllSpells();
 
-    /*this.firebasePromise.then(querySnapshot => {
+    this.firebasePromise.then(querySnapshot => {
       console.log("Found collection");
       this.firebaseDone = true;
       this.model.pages = this.firebase.displaySpells(querySnapshot);
-    });*/
-
-    this.model.pages.push(new SpellModel("Test Spell"));
+    });
   }
 
   ionViewDidLoad() {
@@ -55,6 +53,7 @@ export class SpellImportPage {
 
   import(spell: SpellModel) {
     console.log("Importing " + spell.name);
+    spell.spellbookName = String(this.requestor.name);
 
     for (let i = 0; i < this.requestor.pages.length; i++) {
       if (this.requestor.pages[i].name == spell.name) {
@@ -77,9 +76,10 @@ export class SpellImportPage {
               role: "cancel"
             }]
         }).present();
-        break;
+        return;
       }
     }
+    this.requestor.pages.push(spell);
   }
 
 }

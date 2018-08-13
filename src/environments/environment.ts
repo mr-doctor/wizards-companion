@@ -3,10 +3,12 @@ export const ENV = {
 };
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: " AIzaSyAN4H-9VmncDG0PfqmuhmHrXuBtvCojT2E",
-    authDomain: "todo-firebase-c4298.firebaseapp.com",
-    storageBucket: "todo-firebase-c4298.appspot.com",
-    projectId: "todo-firebase-c4298"
+  firebase : {
+    apiKey: "AIzaSyB3WtVe2EjpaNhcvey944ywVx3JjMNtTNU",
+    authDomain: "wizard-s-companion.firebaseapp.com",
+    databaseURL: "https://wizard-s-companion.firebaseio.com",
+    projectId: "wizard-s-companion",
+    storageBucket: "wizard-s-companion.appspot.com",
+    messagingSenderId: "112408276315"
   }
 };

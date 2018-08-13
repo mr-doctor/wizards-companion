@@ -44,7 +44,8 @@ export class SpellbookPage {
       buttons: [{
         text: "Create New",
         handler: () => {
-          this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1)));
+          console.log(this.model.name.valueOf());
+          this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1), this.model.name.valueOf()));
         }
       }, {
         text: 'Import',

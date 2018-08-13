@@ -44,7 +44,7 @@ export class SpellModel {
   extraEffect: number;
   duration: number;
   durationType: String = "";
-  constructor(public name: string) {
+  constructor(public name: string, public spellbookName: string) {
 
   }
 }

@@ -11,6 +11,9 @@
       {{model.name}}
     </ion-title>
     <ion-buttons *ngIf="allowEdit" end>
+      <button ion-button round (click)="upload()">
+        Upload
+      </button>
       <button ion-button round (click)="edit()">
         Edit
       </button>

@@ -10,7 +10,7 @@
   <ion-list id = "spellbook-list">
     <button *ngFor="let page of pageProvider.pages" class="item item-block item-md" (click) = "jumpToSpellbook(page)" ion-item>
       {{page.name}}
-      <button ion-button color = "light" (click)="delete(page)" item-right>
+      <button ion-button color = "light" (click)="delete(page);$event.stopPropagation();" item-right>
         Delete
       </button>
     </button>

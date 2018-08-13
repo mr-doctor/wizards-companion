@@ -19,10 +19,9 @@
 
 <ion-content padding>
   <ion-list id="spell-list">
-
       <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
         {{page.name}}
-        <button ion-button color = "light" (click)="delete(page)" item-right>
+        <button ion-button color = "light" (click)="delete(page);$event.stopPropagation();" item-right>
           Delete
         </button>
       </button>
