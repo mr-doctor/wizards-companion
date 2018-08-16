@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SpellbookModel} from "../../providers/page/page";
-import {SaveProvider} from "../../providers/save/save";
 
 /**
  * Generated class for the SpellbookEditPage page.
@@ -20,7 +19,7 @@ export class SpellbookEditPage {
   model: SpellbookModel;
   nameInput: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public saver: SaveProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.model = this.navParams.data.inputModel;
     this.nameInput = this.model.name;
   }

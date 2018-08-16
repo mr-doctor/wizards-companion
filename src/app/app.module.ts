@@ -11,7 +11,6 @@ import {SpellPage} from "../pages/spell/spell";
 import { PageProvider } from '../providers/page/page';
 import {SpellEditPage} from "../pages/spell-edit/spell-edit";
 import {SpellbookEditPage} from "../pages/spellbook-edit/spellbook-edit";
-import { SaveProvider } from '../providers/save/save';
 import {IonicStorageModule} from "@ionic/storage";
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import {Firebase} from "@ionic-native/firebase";
@@ -19,6 +18,7 @@ import {AngularFireModule} from "angularfire2";
 import {AngularFireStorageModule} from "angularfire2/storage";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import {SpellImportPage} from "../pages/spell-import/spell-import";
+import {Toast} from "@ionic-native/toast";
 
 var firebaseConfig = {
   apiKey: "",
@@ -62,9 +62,9 @@ var firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PageProvider,
-    SaveProvider,
     FirebaseProvider,
-    Firebase
+    Firebase,
+    Toast,
   ]
 })
 export class AppModule {}

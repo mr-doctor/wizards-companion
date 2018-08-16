@@ -4,6 +4,7 @@ import {SpellbookModel, SpellModel} from "../../providers/page/page";
 import {SpellEditPage} from "../spell-edit/spell-edit";
 import {SpellbookPage} from "../spellbook/spellbook";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
+import {Toast} from "@ionic-native/toast";
 
 /**
  * Generated class for the SpellPage page.
@@ -22,7 +23,10 @@ export class SpellPage {
   model: SpellModel;
   private allowEdit: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebase: FirebaseProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public firebase: FirebaseProvider,
+              public toast: Toast) {
     this.model = this.navParams.data.input;
     this.allowEdit = this.navParams.data.allowEdit;
   }
@@ -33,6 +37,11 @@ export class SpellPage {
   
   upload():void {
     this.firebase.uploadSpell(this.model);
+    this.toast.show("Uploaded " + this.model.name, "3000", "bottom").subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
   ionViewDidLoad() {

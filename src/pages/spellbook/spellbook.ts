@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, reorderArray} from 'ionic-angular';
 import {SpellbookModel, SpellModel} from "../../providers/page/page";
 import {SpellPage} from "../spell/spell";
 import {SpellbookEditPage} from "../spellbook-edit/spellbook-edit";
-import {SaveProvider} from "../../providers/save/save";
 import {SpellImportPage} from "../spell-import/spell-import";
-
-/**
- * Generated class for the SpellbookPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {FirebaseProvider} from "../../providers/firebase/firebase";
+import {Toast} from "@ionic-native/toast";
+import {SpellEditPage} from "../spell-edit/spell-edit";
 
 @IonicPage()
 @Component({
@@ -23,7 +18,11 @@ export class SpellbookPage {
   model: SpellbookModel;
   public pageID: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,
+              public firebase: FirebaseProvider,
+              public toast: Toast) {
     this.model = this.navParams.data.input;
     this.pageID = this.navParams.data.pageID;
     this.model.pageID = this.pageID;
@@ -45,7 +44,9 @@ export class SpellbookPage {
         text: "Create New",
         handler: () => {
           console.log(this.model.name.valueOf());
-          this.model.pages.push(new SpellModel("Spell "+(this.model.pages.length + 1), this.model.name.valueOf()));
+          let spell = new SpellModel("Spell "+(this.model.pages.length + 1), this.model.name.valueOf());
+          this.model.pages.push(spell);
+          this.navCtrl.push(SpellEditPage, {input: spell});
         }
       }, {
         text: 'Import',
@@ -68,11 +69,26 @@ export class SpellbookPage {
     if (index > -1) {
       this.model.pages.splice(index, 1);
     }
-    // this.saver.saveSpellbook(this);
+  }
+
+  upload() {
+    for (let i = 0; i < this.model.pages.length; i++) {
+      this.firebase.uploadSpell(this.model.pages[i]);
+    }
+    this.toast.show("Uploaded " + this.model.name, "3000", "bottom").subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+
   }
 
   edit() {
     this.navCtrl.push(SpellbookEditPage, {inputModel: this.model, parent: this});
+  }
+
+  reorderItems(indexes) {
+    this.model.pages = reorderArray(this.model.pages, indexes);
   }
 
 }

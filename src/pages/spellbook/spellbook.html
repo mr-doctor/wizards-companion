@@ -10,6 +10,9 @@
       {{model.name}}
     </ion-title>
     <ion-buttons end>
+      <button ion-button round (click)="upload()">
+        Upload
+      </button>
       <button ion-button round (click)="edit()">
         Edit
       </button>
@@ -19,12 +22,14 @@
 
 <ion-content padding>
   <ion-list id="spell-list">
+    <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
       <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
         {{page.name}}
         <button ion-button color = "light" (click)="delete(page);$event.stopPropagation();" item-right>
           Delete
         </button>
       </button>
+    </ion-item-group>
   </ion-list>
   <button ion-button block (click) = "newSpell()" text-center="">
     +
@@ -32,5 +37,13 @@
 
   <ion-fab bottom right>
     <button ion-fab (click)="edit()"><ion-icon name="create"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab bottom right >
+    <button ion-fab><ion-icon name="menu"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="edit()"><ion-icon name="create"></ion-icon></button>
+      <button ion-fab (click)="upload()"><ion-icon name="cloud-upload"></ion-icon></button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

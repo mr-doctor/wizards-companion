@@ -36,7 +36,7 @@
 
   <ion-item>
     <ion-label>
-      {{model.range + (("Melee".localeCompare(model.range) == 0 || "".localeCompare(model.range) == 0) ? "" : "metres")}}
+      {{model.range + (("Melee".localeCompare(model.range) == 0 || "".localeCompare(model.range) == 0) ? "" : " metres")}}
     </ion-label>
     <ion-note item-end>
       Range
@@ -68,5 +68,13 @@
   <ion-item text-wrap>
     {{model.desc}}
   </ion-item>
+
+  <ion-fab bottom right >
+    <button ion-fab><ion-icon name="menu"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="edit()"><ion-icon name="create"></ion-icon></button>
+      <button ion-fab (click)="upload()"><ion-icon name="cloud-upload"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

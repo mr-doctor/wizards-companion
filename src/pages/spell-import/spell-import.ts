@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import { Component } from "@angular/core";
+import {AlertController, IonicPage, NavController, NavParams} from "ionic-angular";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {SpellbookModel, SpellModel} from "../../providers/page/page";
 import * as firebase from "firebase";
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 import {SpellPage} from "../spell/spell";
+import {Toast} from "@ionic-native/toast";
 
 @IonicPage()
 @Component({
-  selector: 'page-spell-import',
-  templateUrl: 'spell-import.html',
+  selector: "page-spell-import",
+  templateUrl: "spell-import.html",
 })
 export class SpellImportPage {
 
@@ -20,7 +21,11 @@ export class SpellImportPage {
 
   selected: SpellModel[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebase: FirebaseProvider, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public firebase: FirebaseProvider,
+              public alertCtrl: AlertController,
+              private toast: Toast) {
     this.model = new SpellbookModel("Import Spell");
     this.requestor = this.navParams.data.requestor;
     console.log(this.requestor);
@@ -35,7 +40,7 @@ export class SpellImportPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SpellImportPage');
+    console.log("ionViewDidLoad SpellImportPage");
   }
 
   jumpToSpell(page: SpellModel) {
@@ -64,11 +69,13 @@ export class SpellImportPage {
             text: "Replace",
             handler: () => {
               this.requestor.pages[i] = spell;
+              this.popToast(spell);
             }
           }, {
             text: "Add Anyway",
             handler: () => {
               this.requestor.pages.push(spell);
+              this.popToast(spell);
             }
           },
             {
@@ -80,6 +87,15 @@ export class SpellImportPage {
       }
     }
     this.requestor.pages.push(spell);
+    this.popToast(spell);
+  }
+
+  popToast(spell: SpellModel) {
+    this.toast.show("Added " + spell.name, "3000", "bottom").subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
   }
 
 }
