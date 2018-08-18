@@ -65,23 +65,24 @@ export class SpellImportPage {
         this.alertCtrl.create({
           title: "Duplicate Spell Found!",
           subTitle: "A spell of the same name was found in your spellbook.",
+          cssClass: "custom-alert",
           buttons: [{
             text: "Replace",
             handler: () => {
               this.requestor.pages[i] = spell;
               this.popToast(spell);
-            }
-          }, {
-            text: "Add Anyway",
+            },
+          },{
+            text: "Add",
             handler: () => {
               this.requestor.pages.push(spell);
               this.popToast(spell);
-            }
-          },
-            {
+            },
+          },{
               text: "Cancel",
-              role: "cancel"
-            }]
+              role: "cancel",
+              cssClass: "cancel-button",
+            },]
         }).present();
         return;
       }
@@ -89,7 +90,7 @@ export class SpellImportPage {
     this.requestor.pages.push(spell);
     this.popToast(spell);
   }
-
+  
   popToast(spell: SpellModel) {
     this.toast.show("Added " + spell.name, "3000", "bottom").subscribe(
       toast => {

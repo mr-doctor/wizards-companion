@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -26,7 +25,6 @@ export class PageProvider {
 export class SpellbookModel {
 
   pages: SpellModel[] = [];
-  currentPage: number = 1;
   pageID: number;
 
   constructor(public name: String) {

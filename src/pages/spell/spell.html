@@ -10,14 +10,14 @@
     <ion-title>
       {{model.name}}
     </ion-title>
-    <ion-buttons *ngIf="allowEdit" end>
+    <!--<ion-buttons *ngIf="allowEdit" end>
       <button ion-button round (click)="upload()">
         Upload
       </button>
       <button ion-button round (click)="edit()">
         Edit
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>
@@ -69,12 +69,11 @@
     {{model.desc}}
   </ion-item>
 
-  <ion-fab bottom right >
+  <ion-fab bottom right *ngIf="allowEdit">
     <button ion-fab><ion-icon name="menu"></ion-icon></button>
     <ion-fab-list side="top">
       <button ion-fab (click)="edit()"><ion-icon name="create"></ion-icon></button>
       <button ion-fab (click)="upload()"><ion-icon name="cloud-upload"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
-
 </ion-content>

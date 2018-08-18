@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {SpellModel} from "../page/page";
-import * as firebase from 'firebase';
+import * as firebaseAPI from 'firebase';
 import 'firebase/firestore';
-import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import QuerySnapshot = firebaseAPI.firestore.QuerySnapshot;
 
 @Injectable()
 export class FirebaseProvider {
@@ -19,20 +19,20 @@ export class FirebaseProvider {
       storageBucket: "wizard-s-companion.appspot.com",
       messagingSenderId: "112408276315"
     };
-    
-    firebase.initializeApp(config);
+  
+    firebaseAPI.initializeApp(config);
   }
   
   uploadSpell(spell: SpellModel) {
     var spellJSON = JSON.parse(JSON.stringify(spell));
-    firebase.firestore().collection("Spells").doc(spell.name).set(spellJSON)
+    firebaseAPI.firestore().collection("Spells").doc(spell.name).set(spellJSON)
       .then(function () {
       console.log("Successfully uploaded to global database");
     }).catch(function () {
       console.log("Failed to upload");
     });
-    
-    firebase.firestore().collection(spell.spellbookName).doc(spell.name).set(spellJSON)
+  
+    firebaseAPI.firestore().collection(spell.spellbookName).doc(spell.name).set(spellJSON)
       .then(function () {
         console.log("Successfully uploaded to personal spellbook");
       }).catch(function () {
@@ -41,7 +41,7 @@ export class FirebaseProvider {
   }
 
   static downloadAllSpells() : Promise<QuerySnapshot> {
-    const collectionReference = firebase.firestore().collection("Spells");
+    const collectionReference = firebaseAPI.firestore().collection("Spells");
 
     return collectionReference.get();
   }
