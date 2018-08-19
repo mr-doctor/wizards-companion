@@ -17,12 +17,12 @@ export class SpellEditPage {
   diceType: String = "";
   effectType: String = "";
   desc: String = "";
-
-  model: SpellModel;
   extraEffect: number;
   durationInput: number;
   durationType: String;
-
+  
+  model: SpellModel;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public firebase: FirebaseProvider) {
 
     this.model = this.navParams.data.input;
@@ -61,7 +61,6 @@ export class SpellEditPage {
     } else {
       this.model.durationType = this.durationType;
     }
-    // this.firebase.uploadSpell(this.model);
     this.navCtrl.pop();
   }
 
