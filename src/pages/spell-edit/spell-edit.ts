@@ -61,7 +61,7 @@ export class SpellEditPage {
     } else {
       this.model.durationType = this.durationType;
     }
-    this.firebase.uploadSpell(this.model);
+    // this.firebase.uploadSpell(this.model);
     this.navCtrl.pop();
   }
 

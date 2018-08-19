@@ -10,14 +10,6 @@
     <ion-title>
       {{model.name}}
     </ion-title>
-    <!--<ion-buttons *ngIf="allowEdit" end>
-      <button ion-button round (click)="upload()">
-        Upload
-      </button>
-      <button ion-button round (click)="edit()">
-        Edit
-      </button>
-    </ion-buttons>-->
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +17,7 @@
 
 <ion-content padding>
 
-  <ion-item>
+   <ion-item>
     <ion-label>
       {{model.castTime}}
     </ion-label>
@@ -67,6 +59,10 @@
 
   <ion-item text-wrap>
     {{model.desc}}
+  </ion-item>
+
+  <ion-item *ngIf="!allowEdit">
+    {{"Found in " + model.spellbookName}}
   </ion-item>
 
   <ion-fab bottom right *ngIf="allowEdit">

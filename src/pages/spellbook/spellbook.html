@@ -13,18 +13,23 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list id="spell-list">
-    <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
-      <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
-        {{page.name}}
-        <button ion-button color = "light" (click)="delete(page);$event.stopPropagation();" item-right>
-          Delete
+  <ion-list id="spell-list" reorder="true" (ionItemReorder)="reorderItems($event)">
+      <ion-item-sliding *ngFor="let page of model.pages">
+
+        <button class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
+          {{page.name}}
         </button>
-      </button>
-    </ion-item-group>
+
+        <ion-item-options>
+          <button ion-button icon-only (click)="delete(page)" color='danger'>
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
   </ion-list>
-  <button ion-button block (click) = "newSpell()" text-center="">
-    +
+  <button ion-button block (click)="newSpell()" text-center="">
+    <ion-icon name="add"></ion-icon>
   </button>
 
   <ion-fab bottom right>

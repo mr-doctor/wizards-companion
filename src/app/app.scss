@@ -18,3 +18,13 @@
   -ms-flex-direction: row;
   flex-direction: row ;
 }
+
+.deleteAlert {
+  button.alert-button:nth-child(1){
+  }
+
+  button.alert-button:nth-child(2){
+    background-color: red;
+    color: white;
+  }
+}

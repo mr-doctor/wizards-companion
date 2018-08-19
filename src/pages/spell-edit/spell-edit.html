@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar [hideBackButton]="true">
+  <ion-navbar>
     <ion-title>
       Edit Spell
     </ion-title>
@@ -31,23 +31,23 @@
       <ion-option value="Action">Action</ion-option>
       <ion-option value="Reaction">Reaction</ion-option>
       <ion-option value="Bonus Action">Bonus Action</ion-option>
-      <!--<ion-option value="Ritual">Ritual</ion-option>-->
     </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary" stacked>Duration</ion-label>
-      <ion-input [(ngModel)]="durationInput" type="number" min="0" placeholder={{model.duration}}>
-        {{model.duration}}
-      </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Duration Type</ion-label>
     <ion-select [(ngModel)]="durationType" placeholder={{model.durationType}}>
+      <ion-option value="Instantaneous">Instantaneous</ion-option>
       <ion-option value="Rounds">Rounds</ion-option>
-      <ion-option value="Days">Days</ion-option>
-      <ion-option value="Hours">Hours</ion-option>
       <ion-option value="Minutes">Minutes</ion-option>
+      <ion-option value="Hours">Hours</ion-option>
+      <ion-option value="Days">Days</ion-option>
     </ion-select>
+  </ion-item>
+  <ion-item *ngIf="('Instantaneous'.localeCompare(durationType) != 0)">
+    <ion-label color="primary" stacked>Duration</ion-label>
+    <ion-input [(ngModel)]="durationInput" type="number" min="0" placeholder={{model.duration}}>
+      {{model.duration}}
+    </ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Range</ion-label>

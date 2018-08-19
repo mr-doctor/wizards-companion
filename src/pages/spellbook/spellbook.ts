@@ -64,11 +64,24 @@ export class SpellbookPage {
   }
 
   delete(page: SpellModel) {
-    console.log("Delete page " + page.name)
-    let index = this.model.pages.indexOf(page, 0);
-    if (index > -1) {
-      this.model.pages.splice(index, 1);
-    }
+
+    this.alertCtrl.create({
+      title: "Deleting " + page.name,
+      subTitle: "Are you sure that you want to delete this forever?",
+      cssClass: "deleteAlert",
+      buttons: [{
+        text: "Cancel",
+      },{
+        text: "Delete",
+        handler: () => {
+          console.log("Delete page " + page.name);
+          let index = this.model.pages.indexOf(page, 0);
+          if (index > -1) {
+            this.model.pages.splice(index, 1);
+          }
+        }
+      }]
+    }).present();
   }
 
   upload() {
