@@ -27,7 +27,9 @@
               (click)="jumpToSpell(page)" ion-item>
         {{page.name}}
         <br>
-        {{"from " + page.spellbookName}}
+        <p class="font-size-small" style="color: #a0a0a0;">
+          {{"from " + page.spellbookName}}
+        </p>
         <button ion-button color="light" (click)="import(page);$event.stopPropagation();" item-right>
           Import
         </button>
