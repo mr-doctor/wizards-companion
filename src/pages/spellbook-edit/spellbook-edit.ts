@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {SpellbookModel} from "../../providers/page/page";
+import {SpellbookModel, SpellModel} from "../../providers/page/page";
 
 /**
  * Generated class for the SpellbookEditPage page.
@@ -26,6 +26,9 @@ export class SpellbookEditPage {
 
   save() {
     this.model.name = this.nameInput;
+    for (let i = 0; i < this.model.pages.length; i++) {
+      this.model.pages[i].spellbookName = String(this.nameInput);
+    }
     this.navCtrl.pop();
   }
 

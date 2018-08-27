@@ -1,5 +1,14 @@
 
 .custom-alert {
+  button.alert-button:nth-child(1){
+    background-color: #554f4d;
+  }
+  button.alert-button:nth-child(2){
+    background-color: #554f4d;
+  }
+  button.alert-button:nth-child(3){
+    background-color: #554f4d;
+  }
 }
 
 .custom-alert button.alert-button-group {
@@ -16,11 +25,12 @@
 .custom-alert .alert-button-group-vertical {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
-  flex-direction: row ;
+  flex-direction: row;
 }
 
 .deleteAlert {
   button.alert-button:nth-child(1){
+    background-color: #554f4d;
   }
 
   button.alert-button:nth-child(2){

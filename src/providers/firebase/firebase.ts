@@ -25,13 +25,13 @@ export class FirebaseProvider {
   
   uploadSpell(spell: SpellModel) {
     var spellJSON = JSON.parse(JSON.stringify(spell));
-    firebaseAPI.firestore().collection("Spells").doc(spell.name).set(spellJSON)
+    firebaseAPI.firestore().collection("Spells").doc(spell.name + " from " + spell.spellbookName).set(spellJSON)
       .then(function () {
       console.log("Successfully uploaded to global database");
     }).catch(function () {
       console.log("Failed to upload");
     });
-  
+    
     firebaseAPI.firestore().collection(spell.spellbookName).doc(spell.name).set(spellJSON)
       .then(function () {
         console.log("Successfully uploaded to personal spellbook");
@@ -43,6 +43,12 @@ export class FirebaseProvider {
   static downloadAllSpells() : Promise<QuerySnapshot> {
     const collectionReference = firebaseAPI.firestore().collection("Spells");
 
+    return collectionReference.get();
+  }
+  
+  static downloadSpellsFrom(spellbook: string) : Promise<QuerySnapshot> {
+    const collectionReference = firebaseAPI.firestore().collection(spellbook);
+    
     return collectionReference.get();
   }
   

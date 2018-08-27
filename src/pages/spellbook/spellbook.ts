@@ -40,6 +40,7 @@ export class SpellbookPage {
     let alert = this.alertCtrl.create({
       title: "Add Spell",
       subTitle: "How do you want to add this spell?",
+      cssClass: "custom-alert",
       buttons: [{
         text: "Create New",
         handler: () => {

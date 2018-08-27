@@ -1,3 +1,11 @@
 page-spellbook {
 
 }
+.custom-alert {
+  button.alert-button:nth-child(1){
+    background-color: #554f4d;
+  }
+  button.alert-button:nth-child(2){
+    background-color: #554f4d;
+  }
+}

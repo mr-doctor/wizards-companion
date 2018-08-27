@@ -6,22 +6,49 @@
 
 </ion-header>
 
+<ion-toolbar color="dark-2">
+  <ion-segment [(ngModel)]="tab">
+    <ion-segment-button value="global-spells">
+      <ion-icon name="globe"></ion-icon>
+      All Spells
+    </ion-segment-button>
+
+    <ion-segment-button value="spellbook">
+      <ion-icon name="book"></ion-icon>
+      This Spellbook
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
 
 <ion-content padding>
-  <ion-list id="spell-list">
-    <button *ngFor="let page of model.pages" class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
-      {{page.name}}
-      <button ion-button color="light" (click)="import(page);$event.stopPropagation();" item-right>
-        Import
+  <div [ngSwitch]="tab" *ngIf="firebaseDone">
+    <ion-list *ngSwitchCase="'global-spells'" id="global-spell-list">
+      <button *ngFor="let page of modelGlobal.pages" class="item item-block item-md spell-import-button"
+              (click)="jumpToSpell(page)" ion-item>
+        {{page.name}}
+        <br>
+        {{"from " + page.spellbookName}}
+        <button ion-button color="light" (click)="import(page);$event.stopPropagation();" item-right>
+          Import
+        </button>
       </button>
-    </button>
-  </ion-list>
+    </ion-list>
 
+    <ion-list *ngSwitchCase="'spellbook'" id="single-spell-list">
+      <button *ngFor="let page of modelLocal.pages" class="item item-block item-md spell-import-button"
+              (click)="jumpToSpell(page)" ion-item>
+        {{page.name}}
+        <button ion-button color="light" (click)="import(page);$event.stopPropagation();" item-right>
+          Import
+        </button>
+      </button>
+    </ion-list>
+    <!--<ion-item *ngIf="modelGlobal.pages.length == 0 && modelLocal.pages.length == 0 && firebaseDone">
+      {{"No Spells found."}}
+    </ion-item>
+    <ion-item *ngIf="!firebaseDone">
+      {{"Loading spells..."}}
+    </ion-item>-->
+  </div>
 
-  <ion-item *ngIf="model.pages.length == 0 && firebaseDone">
-    {{"No Spells found."}}
-  </ion-item>
-  <ion-item *ngIf="!firebaseDone">
-    {{"Loading spells..."}}
-  </ion-item>
 </ion-content>

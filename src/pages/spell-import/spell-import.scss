@@ -2,3 +2,8 @@ page-spell-import {
 
 }
 
+.spell-import-button {
+  .button-inner {
+    flex-flow: column;
+  }
+}

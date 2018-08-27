@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 import {AlertController, IonicPage, NavController, NavParams} from "ionic-angular";
 import {FirebaseProvider} from "../../providers/firebase/firebase";
 import {SpellbookModel, SpellModel} from "../../providers/page/page";
-import * as firebase from "firebase";
-import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import * as firebaseLib from "firebase";
+import QuerySnapshot = firebaseLib.firestore.QuerySnapshot;
 import {SpellPage} from "../spell/spell";
 import {Toast} from "@ionic-native/toast";
 
@@ -13,9 +13,12 @@ import {Toast} from "@ionic-native/toast";
   templateUrl: "spell-import.html",
 })
 export class SpellImportPage {
-
-  model: SpellbookModel;
-  private firebasePromise: Promise<QuerySnapshot>;
+  
+  tab: string = 'global-spells';
+  modelGlobal: SpellbookModel = new SpellbookModel("Import Spell");
+  modelLocal: SpellbookModel = new SpellbookModel("");
+  private firebasePromiseGlobal: Promise<QuerySnapshot>;
+  private firebasePromiseLocal: Promise<QuerySnapshot>;
   private firebaseDone: boolean = false;
   private requestor: SpellbookModel;
 
@@ -26,17 +29,34 @@ export class SpellImportPage {
               public firebase: FirebaseProvider,
               public alertCtrl: AlertController,
               private toast: Toast) {
-    this.model = new SpellbookModel("Import Spell");
+    
+    this.modelGlobal = new SpellbookModel("Import Spell");
     this.requestor = this.navParams.data.requestor;
+    this.modelLocal = new SpellbookModel("Import Spell from " + this.requestor.name);
+    
     console.log(this.requestor);
 
-    this.firebasePromise = FirebaseProvider.downloadAllSpells();
+    this.firebasePromiseGlobal = FirebaseProvider.downloadAllSpells();
 
-    this.firebasePromise.then(querySnapshot => {
+    this.firebasePromiseGlobal.then(querySnapshot => {
+      console.log("Found collection");
+      this.modelGlobal.pages = this.firebase.displaySpells(querySnapshot);
+    });
+    
+    let spellbookName: string = String(this.requestor.name);
+  
+    this.firebasePromiseLocal = FirebaseProvider.downloadSpellsFrom(spellbookName);
+  
+    this.firebasePromiseLocal.then(querySnapshot => {
       console.log("Found collection");
       this.firebaseDone = true;
-      this.model.pages = this.firebase.displaySpells(querySnapshot);
+      this.modelLocal.pages = this.firebase.displaySpells(querySnapshot);
     });
+    
+    console.log(this.modelGlobal);
+    console.log(this.modelLocal);
+    
+    this.popLoadingToast();
   }
 
   ionViewDidLoad() {
@@ -45,7 +65,9 @@ export class SpellImportPage {
 
   jumpToSpell(page: SpellModel) {
     this.navCtrl.push(SpellPage, {input: page, allowEdit: false});
+    
   }
+  
   
   select(spell: SpellModel) {
     let index = this.selected.indexOf(spell, 0);
@@ -75,13 +97,13 @@ export class SpellImportPage {
             text: "Replace",
             handler: () => {
               this.requestor.pages[i] = spell;
-              this.popToast(spell);
+              this.popSpellToast(spell);
             },
           },{
             text: "Add",
             handler: () => {
               this.requestor.pages.push(spell);
-              this.popToast(spell);
+              this.popSpellToast(spell);
             },
           },]
         }).present();
@@ -89,11 +111,19 @@ export class SpellImportPage {
       }
     }
     this.requestor.pages.push(spell);
-    this.popToast(spell);
+    this.popSpellToast(spell);
   }
   
-  popToast(spell: SpellModel) {
-    this.toast.show("Added " + spell.name, "3000", "bottom").subscribe(
+  popSpellToast(spell: SpellModel) {
+      this.toast.show("Added " + spell.name, "3000", "bottom").subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
+  }
+  
+  popLoadingToast() {
+    this.toast.show("Loading...", "3000", "bottom").subscribe(
       toast => {
         console.log(toast);
       }
