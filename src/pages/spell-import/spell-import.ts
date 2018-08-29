@@ -15,8 +15,8 @@ import {Toast} from "@ionic-native/toast";
 export class SpellImportPage {
   
   tab: string = 'global-spells';
-  modelGlobal: SpellbookModel = new SpellbookModel("Import Spell");
-  modelLocal: SpellbookModel = new SpellbookModel("");
+  modelGlobal: SpellbookModel = new SpellbookModel("Import Spell", "");
+  modelLocal: SpellbookModel = new SpellbookModel("", "");
   private firebasePromiseGlobal: Promise<QuerySnapshot>;
   private firebasePromiseLocal: Promise<QuerySnapshot>;
   private firebaseDone: boolean = false;
@@ -30,9 +30,9 @@ export class SpellImportPage {
               public alertCtrl: AlertController,
               private toast: Toast) {
     
-    this.modelGlobal = new SpellbookModel("Import Spell");
+    this.modelGlobal = new SpellbookModel("Import Spell", "");
     this.requestor = this.navParams.data.requestor;
-    this.modelLocal = new SpellbookModel("Import Spell from " + this.requestor.name);
+    this.modelLocal = new SpellbookModel("Import Spell from " + this.requestor.name, "");
     
     console.log(this.requestor);
 
@@ -43,7 +43,7 @@ export class SpellImportPage {
       this.modelGlobal.pages = this.firebase.displaySpells(querySnapshot);
     });
     
-    let spellbookName: string = String(this.requestor.name);
+    let spellbookName: string = String(this.requestor.name) + this.requestor.id;
   
     this.firebasePromiseLocal = FirebaseProvider.downloadSpellsFrom(spellbookName);
   
@@ -81,6 +81,7 @@ export class SpellImportPage {
   import(spell: SpellModel) {
     console.log("Importing " + spell.name);
     spell.spellbookName = String(this.requestor.name);
+    spell.spellbookID = this.requestor.id;
 
     for (let i = 0; i < this.requestor.pages.length; i++) {
       if (this.requestor.pages[i].name == spell.name) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams, reorderArray} from 'ionic-angular';
-import {SpellbookModel, SpellModel} from "../../providers/page/page";
+import {PageProvider, SpellbookModel, SpellModel} from "../../providers/page/page";
 import {SpellPage} from "../spell/spell";
 import {SpellbookEditPage} from "../spellbook-edit/spellbook-edit";
 import {SpellImportPage} from "../spell-import/spell-import";
@@ -16,16 +16,12 @@ import {SpellEditPage} from "../spell-edit/spell-edit";
 export class SpellbookPage {
 
   model: SpellbookModel;
-  public pageID: number;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
-              public firebase: FirebaseProvider,
-              public toast: Toast) {
+              public pageProvider: PageProvider) {
     this.model = this.navParams.data.input;
-    this.pageID = this.navParams.data.pageID;
-    this.model.pageID = this.pageID;
   }
 
   ionViewWillLoad() {
@@ -45,7 +41,9 @@ export class SpellbookPage {
         text: "Create New",
         handler: () => {
           console.log(this.model.name.valueOf());
-          let spell = new SpellModel("Spell "+(this.model.pages.length + 1), this.model.name.valueOf());
+          // Unique ID generation from https://gist.github.com/6174/6062387
+          let id : string = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+          let spell = new SpellModel("Spell "+(this.model.pages.length + 1), this.model.name.valueOf(), this.model.id, id);
           this.model.pages.push(spell);
           this.navCtrl.push(SpellEditPage, {input: spell});
         }
@@ -64,45 +62,8 @@ export class SpellbookPage {
     this.navCtrl.push(SpellPage, {input: page, allowEdit: true});
   }
 
-  delete(page: SpellModel) {
-
-    this.alertCtrl.create({
-      title: "Deleting " + page.name,
-      subTitle: "Are you sure that you want to delete this forever?",
-      cssClass: "deleteAlert",
-      buttons: [{
-        text: "Cancel",
-      },{
-        text: "Delete",
-        handler: () => {
-          console.log("Delete page " + page.name);
-          let index = this.model.pages.indexOf(page, 0);
-          if (index > -1) {
-            this.model.pages.splice(index, 1);
-          }
-        }
-      }]
-    }).present();
-  }
-
-  upload() {
-    for (let i = 0; i < this.model.pages.length; i++) {
-      this.firebase.uploadSpell(this.model.pages[i]);
-    }
-    this.toast.show("Uploaded " + this.model.name, "3000", "bottom").subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
-
-  }
-
   edit() {
     this.navCtrl.push(SpellbookEditPage, {inputModel: this.model, parent: this});
-  }
-
-  reorderItems(indexes) {
-    this.model.pages = reorderArray(this.model.pages, indexes);
   }
 
 }

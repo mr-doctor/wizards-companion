@@ -7,16 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list id="spellbook-list" reorder="true" (ionItemReorder)="reorderItems($event)">
+  <ion-list id="spellbook-list" reorder="true" (ionItemReorder)="pageProvider.reorderItems($event)">
 
-      <ion-item-sliding *ngFor="let page of pageProvider.pages">
+      <ion-item-sliding *ngFor="let page of pageProvider.spellbooks">
 
         <button class="item item-block item-md" (click)="jumpToSpellbook(page)" ion-item>
           {{page.name}}
         </button>
 
         <ion-item-options>
-          <button ion-button icon-only (click)="delete(page)" color='danger'>
+          <button ion-button icon-only (click)="pageProvider.delete(page)" color='danger'>
             <ion-icon name="trash"></ion-icon>
           </button>
         </ion-item-options>

@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list id="spell-list" reorder="true" (ionItemReorder)="reorderItems($event)">
+  <ion-list id="spell-list" reorder="true" (ionItemReorder)="pageProvider.reorderItems($event)">
       <ion-item-sliding *ngFor="let page of model.pages">
 
         <button class="item item-block item-md" (click)="jumpToSpell(page)" ion-item>
@@ -21,7 +21,7 @@
         </button>
 
         <ion-item-options>
-          <button ion-button icon-only (click)="delete(page)" color='danger'>
+          <button ion-button icon-only (click)="pageProvider.delete(page)" color='danger'>
             <ion-icon name="trash"></ion-icon>
           </button>
         </ion-item-options>
@@ -40,7 +40,7 @@
     <button ion-fab><ion-icon name="menu"></ion-icon></button>
     <ion-fab-list side="top">
       <button ion-fab (click)="edit()"><ion-icon name="create"></ion-icon></button>
-      <button ion-fab (click)="upload()"><ion-icon name="cloud-upload"></ion-icon></button>
+      <button ion-fab (click)="pageProvider.upload(model)"><ion-icon name="cloud-upload"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

@@ -25,14 +25,14 @@ export class FirebaseProvider {
   
   uploadSpell(spell: SpellModel) {
     var spellJSON = JSON.parse(JSON.stringify(spell));
-    firebaseAPI.firestore().collection("Spells").doc(spell.name + " from " + spell.spellbookName).set(spellJSON)
+    firebaseAPI.firestore().collection("Spells").doc(spell.name + spell.spellID).set(spellJSON)
       .then(function () {
       console.log("Successfully uploaded to global database");
     }).catch(function () {
       console.log("Failed to upload");
     });
     
-    firebaseAPI.firestore().collection(spell.spellbookName).doc(spell.name).set(spellJSON)
+    firebaseAPI.firestore().collection(spell.spellbookName + spell.spellbookID).doc(spell.name + spell.spellID).set(spellJSON)
       .then(function () {
         console.log("Successfully uploaded to personal spellbook");
       }).catch(function () {
@@ -68,7 +68,7 @@ export class FirebaseProvider {
   }
 
   static toSpell(data: JSON) {
-    const spell: SpellModel = new SpellModel(data["name"], data["spellbookName"]);
+    const spell: SpellModel = new SpellModel(data["name"], data["spellbookName"], data["spellbookID"], data["spellID"]);
     spell.castTime = data["castTime"];
     spell.duration = data["duration"];
     spell.dice = data["dice"];
