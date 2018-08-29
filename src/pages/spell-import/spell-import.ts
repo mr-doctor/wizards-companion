@@ -21,6 +21,7 @@ export class SpellImportPage {
   private firebasePromiseLocal: Promise<QuerySnapshot>;
   private firebaseDone: boolean = false;
   private requestor: SpellbookModel;
+  private popped = false;
 
   selected: SpellModel[] = [];
 
@@ -44,7 +45,7 @@ export class SpellImportPage {
     });
     
     let spellbookName: string = String(this.requestor.name) + this.requestor.id;
-  
+   
     this.firebasePromiseLocal = FirebaseProvider.downloadSpellsFrom(spellbookName);
   
     this.firebasePromiseLocal.then(querySnapshot => {
@@ -121,6 +122,15 @@ export class SpellImportPage {
           console.log(toast);
         }
       );
+  }
+  
+  popFailedToast() {
+    this.toast.show("No Spells Found", "3000", "bottom").subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+    this.popped = true;
   }
   
   popLoadingToast() {

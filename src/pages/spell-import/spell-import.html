@@ -45,12 +45,9 @@
         </button>
       </button>
     </ion-list>
-    <!--<ion-item *ngIf="modelGlobal.pages.length == 0 && modelLocal.pages.length == 0 && firebaseDone">
-      {{"No Spells found."}}
+   <ion-item *ngIf="modelGlobal.pages.length == 0 && modelLocal.pages.length == 0 && firebaseDone && popped">
+      {{popFailedToast()}}
     </ion-item>
-    <ion-item *ngIf="!firebaseDone">
-      {{"Loading spells..."}}
-    </ion-item>-->
   </div>
 
 </ion-content>

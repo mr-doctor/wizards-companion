@@ -25,7 +25,7 @@ export class FirebaseProvider {
   
   uploadSpell(spell: SpellModel) {
     var spellJSON = JSON.parse(JSON.stringify(spell));
-    firebaseAPI.firestore().collection("Spells").doc(spell.name + spell.spellID).set(spellJSON)
+    firebaseAPI.firestore().collection("Spells").doc(spell.name + spell.spellbookID + " " + spell.spellID).set(spellJSON)
       .then(function () {
       console.log("Successfully uploaded to global database");
     }).catch(function () {
@@ -39,7 +39,7 @@ export class FirebaseProvider {
         console.log("Failed to upload");
       });
   }
-
+  
   static downloadAllSpells() : Promise<QuerySnapshot> {
     const collectionReference = firebaseAPI.firestore().collection("Spells");
 
