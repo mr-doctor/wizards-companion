@@ -25,13 +25,16 @@ export class FirebaseProvider {
   
   uploadSpell(spell: SpellModel) {
     var spellJSON = JSON.parse(JSON.stringify(spell));
+    
+    // Store the spell globally under its name and the spellbook's name, to ensure that there are no data collisions
     firebaseAPI.firestore().collection("Spells").doc(spell.name + spell.spellbookID + " " + spell.spellID).set(spellJSON)
       .then(function () {
       console.log("Successfully uploaded to global database");
     }).catch(function () {
       console.log("Failed to upload");
     });
-    
+  
+    // Store the spell under its name in the spellbook, with a unique id for each to prevent data collisions
     firebaseAPI.firestore().collection(spell.spellbookName + spell.spellbookID).doc(spell.name + spell.spellID).set(spellJSON)
       .then(function () {
         console.log("Successfully uploaded to personal spellbook");

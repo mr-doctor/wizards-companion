@@ -31,8 +31,13 @@ export class SpellImportPage {
               public alertCtrl: AlertController,
               private toast: Toast) {
     
+    // creates the blank spellbook to hold the imported global spells
     this.modelGlobal = new SpellbookModel("Import Spell", "");
+  
+    // sets the spellbook wanting to import
     this.requestor = this.navParams.data.requestor;
+  
+    // creates the blank spellbook to hold the imported local spells
     this.modelLocal = new SpellbookModel("Import Spell from " + this.requestor.name, "");
     
     console.log(this.requestor);
@@ -66,21 +71,16 @@ export class SpellImportPage {
 
   jumpToSpell(page: SpellModel) {
     this.navCtrl.push(SpellPage, {input: page, allowEdit: false});
-    
   }
   
-  
-  select(spell: SpellModel) {
-    let index = this.selected.indexOf(spell, 0);
-    if (index > -1) {
-      this.selected.splice(index, 1);
-    } else {
-      this.selected.push(spell);
-    }
-  }
-
+  /**
+   * Attempts to import the given spell, prompting the user if a duplicate is found
+   * @param spell
+   */
   import(spell: SpellModel) {
     console.log("Importing " + spell.name);
+    
+    // Make this spell belong to the spellbook, so that there are no collision errors in Firebase when it is reuploaded
     spell.spellbookName = String(this.requestor.name);
     spell.spellbookID = this.requestor.id;
 
@@ -125,7 +125,10 @@ export class SpellImportPage {
   }
   
   popFailedToast() {
-    this.toast.show("No Spells Found", "3000", "bottom").subscribe(
+    if (this.popped) {
+      return;
+    }
+    this.toast.show("No Spells Found", "5000", "bottom").subscribe(
       toast => {
         console.log(toast);
       }
